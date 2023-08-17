@@ -56,3 +56,20 @@ Route::put('/atualizarfuncionario/{id_do_funcionario}', function(Request $inform
     $Colaborador->save();
     echo "(;Funcionario Atualizado com Sucesso ;)";
 });
+
+Route::get('/deletarfuncionario/{id_do_funcionario}', function($id_do_funcionario){
+    $Colaborador = Colaborador::findorfail($id_do_funcionario);
+    $Colaborador->delete();
+    echo "Funcionario Deletado!";
+});
+
+Route::get('/listagemfuncionario', function (Request $informacao) {
+    $Colaborador = Colaborador::select('nome', 'cargo', 'salario', 'setor')->get();
+    foreach ($Colaborador as $Colaborador) {
+        echo "Nome: " . $Colaborador->nome . "<br>";
+        echo "Telefone: " . $Colaborador->cargo . "<br>";
+        echo "Telefone: " . $Colaborador->salario . "<br>";
+        echo "Telefone: " . $Colaborador->setor . "<br>";
+        echo "<br>";
+    }
+});
